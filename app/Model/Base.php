@@ -9,10 +9,25 @@ namespace Flickrer\Model;
 class Base
 {
     /**
+     * allowed keys
+     * @var array
+     */
+    protected $allowedKeys = [];
+
+    /**
      * a good object needs to have a state storage
      * @var array
      */
     protected $data = [];
+
+    /**
+     * setup the base data here
+     * @param $data
+     */
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
 
     /**
      * and it needs a setter
@@ -32,9 +47,9 @@ class Base
      * @param $default
      * @return mixed
      */
-    public function get($k, $default)
+    public function get($k, $default = null)
     {
-        return isset($this->data[$k]) ? $default : $this->data[$k];
+        return isset($this->data[$k]) ? $this->data[$k] : $default;
     }
 
     /**
@@ -44,7 +59,7 @@ class Base
      */
     public function toJson()
     {
-        return json_encode($this->data);
+        return json_encode($this->getData());
 
     }
 
@@ -52,8 +67,18 @@ class Base
      * retrieve all data
      * @return array
      */
-    public function getData()
+    public function getData($allowedKeysOnly = true)
     {
+        if ($allowedKeysOnly && !empty($this->allowedKeys)) {
+            $data = [];
+            foreach ($this->data as $k => $v) {
+                if (in_array($k, $this->allowedKeys)) {
+                    $data[$k] = $v;
+                }
+            }
+            return $data;
+        }
+
         return $this->data;
     }
 

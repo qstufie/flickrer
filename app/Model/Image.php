@@ -8,13 +8,4 @@ namespace Flickrer\Model;
 
 class Image extends Base
 {
-    /**
-     * setup the base data here
-     * @param $data
-     */
-    public function __construct($data)
-    {
-
-
-    }
 }

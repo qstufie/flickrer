@@ -6,6 +6,7 @@
   "scripts": {
     "test:dao": "./vendor/phpunit/phpunit/phpunit tests/cases/dao/",
     "test:service": "./vendor/phpunit/phpunit/phpunit tests/cases/service/",
+    "test:model": "./vendor/phpunit/phpunit/phpunit tests/cases/model/",
     "test": "echo 'Run all tests' && npm run test:dao -s && npm run test:service -s"
   },
   "repository": {

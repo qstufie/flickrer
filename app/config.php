@@ -14,7 +14,8 @@ $prod = [
         'pass' => '<db_pass>',
         'dbname' => 'flickrer'
     ],
-    'endpoint' => '<flickr_ep>'
+    'endpoint' => '<flickr_ep>',
+    'salt' => '<userpass_salt>'
 ];
 
 // dev
@@ -26,10 +27,12 @@ $dev['endpoint'] = 'https://api.flickr.com/services/rest/?method=flickr.photos.s
 $dev['db']['host']   = "127.0.0.1";
 $dev['db']['user']   = "dev";
 $dev['db']['pass']   = "pass123";
+$dev['salt'] = 'dev-salt';
 
 // unit_test
 $unit_test = $dev;
 $unit_test['db']['dbname'] = 'flickrer_test';
+$unit_test['salt'] = 'unit-test-salt';
 
 return [
     'dev' => $dev,

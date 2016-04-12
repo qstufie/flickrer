@@ -12,6 +12,12 @@ use \Flickrer\Model\User as oneUser;
 class User
 {
     /**
+     * user dao
+     * @var \Flickrer\Dao\User;
+     */
+    protected $dao;
+
+    /**
      * singleton of user service
      * @return User
      */
@@ -32,6 +38,7 @@ class User
         if (empty($_SESSION['_started_at'])) {
             $_SESSION['_started_at'] = date('Y-m-d H:i:s');
         }
+        $this->dao = \Flickrer\Dao\User::singleton();
     }
 
     /**
@@ -41,19 +48,57 @@ class User
     public function getInfo()
     {
         if (!empty($_SESSION['user']) && $_SESSION['user'] instanceof oneUser) {
-            return $_SESSION['user']->getData();
+            return ['user' => $_SESSION['user']->getData(), 'isLoggedIn' => $_SESSION['isLoggedIn']];
         }
         return [];
     }
 
     /**
      * user registration
-     * @param $userName
+     * @param $username
      * @param $password
+     * @param $name
+     * @return bool
      */
-    public function register($userName, $password)
+    public function register($username, $password, $name)
     {
+        // 1st, try login
+        try {
+            $u = $this->login($username, $password);
+            if ($u instanceof oneUser) return true;
+        } catch (\Exception $e) {
+            // only do it here
+            // insert new one here
+            $u = $this->dao->register($username, $password, $name);
+            // start session as well!
+            if ($u instanceof oneUser) {
+                $_SESSION['user'] = $u;
+                $_SESSION['isLoggedIn'] = true;
+            }
+            return $u;
+        }
+    }
 
+
+    /**
+     * login of user
+     * @param $username
+     * @param $password
+     * @return oneUser
+     * @throws \Exception
+     */
+    public function login($username, $password)
+    {
+        $u = $this->dao->getUserByUsernameAndPassword($username, $password);
+        if ($u instanceof oneUser) {
+            // user is in!
+            // start session
+            $_SESSION['user'] = $u;
+            $_SESSION['isLoggedIn'] = true;
+            return $u;
+        } else {
+            throw new \Exception('Invalid username or password');
+        }
 
     }
 

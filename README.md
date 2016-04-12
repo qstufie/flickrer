@@ -35,6 +35,19 @@ the whole app is done in a super simple structure:
 ## test
 Grab the `testdb.sql` file from \cfn folder and import it into your mysql db. 
 
+Then simply run the following commands to test
+- `npm run test` to run all tests
+- `npm run test:dao` to run dao tests
+- `npm run test:service` to run service tests
+- `npm run test:mode` to run model tests
+
+## compromises
+The email says I get 48 hours, in reality, I get home at 7pm and I need to spend time with my 6 year old, so I get around 9pm - 12pm, 3 hours window to code this thingy. So I had to skip a few things:
+
+- Unit test coverage is not 100% - but it's close enough
+- there's no email function in user, and also i don't verify your username uniqueness - it's easy to do but i just don't have the time - this is enforced in db, however, just not done at the frontend
+- I used my own JS libs for frontend so it's easier to code, but you'll need to understand the lib to understand my codes (good thing is they are straightforward).
+
 
 
 

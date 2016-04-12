@@ -6,7 +6,7 @@
 require_once __DIR__ . '/../header.php';
 
 /**
- * test core
+ * test base
  */
 class TestDaoBase extends PHPUnit_Framework_TestCase
 {
