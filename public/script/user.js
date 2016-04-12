@@ -11,13 +11,13 @@
   // tempaltes
   app.template.main = {
     default: '<div class="panel panel-primary"><div class="panel-heading">{hdr}</div><div class="panel-body">' +
-    '<form role="form">{info}' +
+    '<form autocomplete="off" role="form">{info}' +
     '<div class="form-group" {attr}><label>Your name:</label>{name}</div>' +
     '<div class="form-group" {attr}><label>Username:</label>{username}</div>' +
     '<div class="form-group" {attr}><label>Password:</label>{password}</div>' +
     '{submit}' +
     '</form>' +
-    '</div></div>'
+    '{msg}</div></div>'
   };
 
   app.template.sub.hdr = {
@@ -25,6 +25,9 @@
   };
   app.template.sub.info = {
     default: '<div {attr}>{_info}</div>'
+  };
+  app.template.sub.msg = {
+    default: '<div {attr}>{_msg}</div>'
   };
   app.template.sub.name = {
     _type: 'input',
@@ -52,6 +55,10 @@
     'simply put in your username and password, click the same button and we\'ll log you in</p>',
     class: 'alert alert-info'
   };
+  app.data.msg = {
+    _msg: '',
+    class: ''
+  };
   app.data.name = {
     type: 'text',
     class: 'form-control',
@@ -59,11 +66,13 @@
   };
   app.data.username = {
     type: 'text',
+    autocomplete: 'off',
     class: 'form-control',
     placeholder: 'please enter your username, must be one word with no spaces or special characters'
   };
   app.data.password = {
     type: 'password',
+    autocomplete: 'off',
     class: 'form-control',
     placeholder: 'please enter your password, make it hard to guess!'
   };
@@ -76,8 +85,19 @@
   // callback of submit
   app.on(SimpleAppStateIsUpdated, 'submit', function (obj) {
     $.post('/user/rego', app.state).done(function (resp) {
-      // alert state change
-      SimpleApp('flickrer').updateState('userState', {state: resp});
+      resp = JSON.parse(resp);
+      // success?
+      if (resp.success === true) {
+        // alert state change
+        SimpleApp('flickrer').updateState('userState', {state: resp});
+      } else {
+        // show error
+        app.data.msg = {
+          _msg: '<b>Error: </b>' + resp.error,
+          class: 'alert alert-danger'
+        };
+        app.render();
+      }
     });
   });
 

@@ -81,7 +81,7 @@
     var text = obj.state.text.replace(/ /g, '');
     if (tag.length <= 0 && text.length <= 0) {
       app.data.info = {
-        _info: '<p>Please enter text into at least one field</p>',
+        _info: '<p><b>ERROR</b>: Please enter text into at least one field</p>',
         class: 'alert alert-danger'
       }
     } else {
