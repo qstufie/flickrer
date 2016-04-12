@@ -67,7 +67,9 @@
     $.getJSON('/user').done(function (resp) {
       console.log(resp);
       // check logged in or out
-      app.data.hdr._lbl = 'Flickr Search | <small>Welcome, ' + resp.user.name + ', you registered at ' + resp.user.created_at + '</small>';
+      app.data.hdr._lbl = 'Flickr Search | <small>Welcome, ' + resp.user.name + ', you registered at ' +
+        resp.user.created_at + '</small>' +
+        '<button class="pull-right btn btn-danger btn-xs" onclick="logout()">logout</button>';
       app.render();
     });
   });
@@ -93,6 +95,14 @@
 
   // render
   app.init(document.getElementById('app'), true);
+
+  // extra
+  window.logout = function () {
+    $.get('/user/logout').done(function(resp) {
+      // alert state change
+      SimpleApp('flickrer').updateState('userState', {state: resp});
+    })
+  }
 
 })
 ();
