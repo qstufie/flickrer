@@ -1,0 +1,36 @@
+{
+  "name": "flickrer",
+  "version": "1.0.0",
+  "description": "flicker client with user rego",
+  "main": "index.html",
+  "scripts": {
+    "test:dao": "./vendor/phpunit/phpunit/phpunit tests/cases/dao/",
+    "test:service": "./vendor/phpunit/phpunit/phpunit tests/cases/service/",
+    "test": "echo 'Run all tests' && npm run test:dao -s && npm run test:service -s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qstufie/flickrer.git"
+  },
+  "keywords": [
+    "flicker",
+    "big",
+    "commerce"
+  ],
+  "author": "Bruce B Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qstufie/flickrer/issues"
+  },
+  "homepage": "https://github.com/qstufie/flickrer#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "http-server": "^0.8.5",
+    "jshint": "^2.9.1",
+    "minami": "^1.1.1",
+    "minifier": "^0.7.1",
+    "mocha": "^2.4.5",
+    "uglify-js": "^2.6.1",
+    "watch": "^0.17.1"
+  }
+}

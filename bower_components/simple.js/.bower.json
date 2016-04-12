@@ -1,0 +1,43 @@
+{
+  "name": "simple.js",
+  "description": "a 7k data driven app engine",
+  "main": "dist/simple.min.js",
+  "authors": [
+    "Bruce B Li"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "simple",
+    "js",
+    "app",
+    "data",
+    "driven",
+    "state",
+    "virtual",
+    "node"
+  ],
+  "homepage": "https://github.com/coreorm/simple.js",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "html",
+    "src",
+    "*.json",
+    "**/*.md",
+    "tests"
+  ],
+  "version": "1.1.5",
+  "_release": "1.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.5",
+    "commit": "f7e7db580b70de1e009e8003c9d2be56e9fafcec"
+  },
+  "_source": "https://github.com/coreorm/simple.js.git",
+  "_target": "^1.1.5",
+  "_originalSource": "simplejs",
+  "_direct": true
+}

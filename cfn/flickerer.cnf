@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+    DocumentRoot "/Users/bbqq/Workspace/flickrer/public"
+    ServerName flicker.local
+    SetEnv AppEnv dev
+
+    <Directory "/Users/bbqq/Workspace/flickrer/public">
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ main.php [QSA,L]
+    </Directory>
+</VirtualHost>
