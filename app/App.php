@@ -76,7 +76,7 @@ namespace Flickrer {
             $app = $this->app;
             // index pure html
             $this->app->get('/', function (Request $request, Response $response) {
-                $response->getBody()->write('adfsaf');
+                $response->getBody()->write('Please browse into /index.html, thank you');
                 return $response;
             });
 
@@ -84,7 +84,41 @@ namespace Flickrer {
             $user = User::singleton();
 
             $this->app->get('/user', function (Request $request, Response $response) use ($user, $app) {
-                $response->withJson(['user' => $user->getInfo(), 'db' => App::getSetting('db')]);
+                $response->withJson($user->getInfo());
+            });
+
+            // user register
+            $this->app->post('/user/rego', function (Request $request, Response $response) use ($user, $app) {
+                try {
+                    $data = $request->getParsedBody();
+
+                    if (empty($data['name'])) {
+                        $data['name'] = 'N/A';
+                    }
+                    if (empty($data['username']) || empty($data['password'])) {
+                        throw new \Exception('Invalid input, please enter valid username/password');
+                    }
+                    $u = $user->register($data['username'], $data['password'], $data['name']);
+                    if ($u instanceof \Flickrer\Model\User || $u === true) {
+                        $response->withJson([
+                            'success' => true,
+                            'user' => $user->getInfo()
+                        ]);
+                    }
+                } catch (\Exception $e) {
+                    $response->withJson([
+                        'success' => false,
+                        'error' => $e->getMessage()
+                    ]);
+                }
+            });
+
+            // logout
+            $this->app->get('/user/logout', function (Request $request, Response $response) {
+                unset($_SESSION['isLoggedIn'], $_SESSION['user']);
+                $response->withJson([
+                    'message'=> 'user has logged out'
+                ]);
             });
         }
 

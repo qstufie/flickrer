@@ -87,7 +87,7 @@ class Base
             $err = !empty($err[2]) ? $err[2] : null;
             $code = $this->stmt->errorCode();
         }
-        throw new \Exception('PDO Error: ' + $err, $code);
+        throw new \Exception('PDO Error: ' . $err, $code);
     }
 
     /**
@@ -116,7 +116,7 @@ class Base
      */
     public function fetchOne($sql, $bind = array())
     {
-        $r = (array) $this->fetchAll($sql, $bind);
+        $r = (array)$this->fetchAll($sql, $bind);
         if (count($r) > 0) return current($r);
     }
 

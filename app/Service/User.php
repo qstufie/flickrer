@@ -48,9 +48,11 @@ class User
     public function getInfo()
     {
         if (!empty($_SESSION['user']) && $_SESSION['user'] instanceof oneUser) {
-            return ['user' => $_SESSION['user']->getData(), 'isLoggedIn' => $_SESSION['isLoggedIn']];
+            $u = $_SESSION['user']->getData();
+            unset($u['passhash']);
+            return ['user' => $u, 'isLoggedIn' => $_SESSION['isLoggedIn']];
         }
-        return [];
+        return ['user' => [], 'isLoggedIn' => false];
     }
 
     /**

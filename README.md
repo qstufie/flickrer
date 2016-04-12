@@ -47,7 +47,9 @@ The email says I get 48 hours, in reality, I get home at 7pm and I need to spend
 - Unit test coverage is not 100% - but it's close enough
 - there's no email function in user, and also i don't verify your username uniqueness - it's easy to do but i just don't have the time - this is enforced in db, however, just not done at the frontend
 - I used my own JS libs for frontend so it's easier to code, but you'll need to understand the lib to understand my codes (good thing is they are straightforward).
-
+- Just to save time, I rely on db throwing errors to show to the front, i'm not really doing input error handling myself, but since I'm using pdo/binding, data sanitizing is not required.
+- I was planning to do continious build/integration on JS resources but just don't have time, so I have all the dependencies there just don't really have the process there yet... anyway, so here comes the big app.js and separate js for other pages
+- also don't have time for fancy loadings guys... I only got 6 hrs in total.
 
 
 
