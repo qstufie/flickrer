@@ -75,6 +75,44 @@ class TestDaoBase extends PHPUnit_Framework_TestCase
         $this->assertNull($u);
 
     }
+
+    public function testUpdate()
+    {
+        $data = [
+            'name' => 'John Doe',
+            'username' => 'jd',
+            'passhash' => md5(time())
+        ];
+        $this->dao->insert($data, 'users');
+        $id = $this->dao->getLastInsertId();
+        // now, delete then retrieve again, it should be null
+        $this->dao->update(['name' => 'newName'], 'users', 'id = ' . $id);
+        // retrieve then compare
+        $u = $this->dao->fetchOne('select * from users where id = ?', array($id));
+        $this->assertEquals($u['name'], 'newName');
+
+    }
+
+    public function testReplaceInto()
+    {
+        $data = [
+            'name' => 'John Doe',
+            'username' => 'jd',
+            'passhash' => md5(time())
+        ];
+        $this->dao->insert($data, 'users');
+        $id = $this->dao->getLastInsertId();
+        // now, delete then retrieve again, it should be null
+        $data['id'] = $id;
+        $data['name'] = 'newName';
+        $this->dao->replaceInto($data, 'users');
+        // retrieve then compare
+        $u = $this->dao->fetchOne('select * from users where id = ?', array($id));
+        $this->assertEquals($u['name'], 'newName');
+
+    }
+
+
 }
 
 ?>
