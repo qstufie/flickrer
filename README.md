@@ -25,7 +25,7 @@ In project root
 - Then run all the following commands (just copy/paste and hit enter).
 
 ```
-cd /var/www
+cd /var/www/cfn
 sudo cp flickerer.vagrant.conf /etc/apache2/sites-enabled/
 mysql -u root -proot < db.sql
 mysql -u root -proot < testdb.sql
