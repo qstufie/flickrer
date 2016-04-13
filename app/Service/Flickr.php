@@ -165,6 +165,9 @@ class Flickr
                 $tmp['_' . $k] = $v;
             }
             $tmp['_page'] = $i;
+            if ($i == $page) {
+                $tmp['class'] = 'active';
+            }
             $paging[] = $tmp;
         }
 

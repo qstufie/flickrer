@@ -24,7 +24,7 @@
   };
   app.template.sub.paging = {
     _wrapper: ['<ul {attr} class="pagination">', '</ul>'],
-    default: '<li><a href="#" onclick="window.search(\'{_tags}\', \'{_text}\', {_page})">{_page}</a></li>'
+    default: '<li {attr}><a href="#" onclick="window.search(\'{_tags}\', \'{_text}\', {_page})">{_page}</a></li>'
   };
 
   // data (late binding)

@@ -34,9 +34,9 @@ $dev['salt'] = 'dev-salt';
 
 // vagrant box
 $vagrant = $dev;
-$vagrant['db']['host']   = "localhost";
-$vagrant['db']['user']   = "root";
-$vagrant['db']['pass']   = "root";
+$vagrant['db']['host']   = "127.0.0.1";
+$dev['db']['user']   = "root";
+$dev['db']['pass']   = "root";
 $vagrant['salt'] = 'vagrant-salt';
 
 // unit_test
