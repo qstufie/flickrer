@@ -9,6 +9,10 @@ namespace Flickrer\Service;
 use Flickrer\Utility\Object;
 use \Flickrer\Model\User as oneUser;
 
+/**
+ * Class User
+ * @package Flickrer\Service
+ */
 class User
 {
     /**
@@ -39,6 +43,19 @@ class User
             $_SESSION['_started_at'] = date('Y-m-d H:i:s');
         }
         $this->dao = \Flickrer\Dao\User::singleton();
+    }
+
+    /**
+     * get current user id from session
+     */
+    public function getUserId()
+    {
+        $info = $this->getInfo();
+        if (!empty($info['user']['id'])) {
+            return $info['user']['id'];
+        }
+        // default
+        return 0;
     }
 
     /**

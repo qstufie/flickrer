@@ -5,6 +5,7 @@
  */
 namespace Flickrer {
 
+    use Flickrer\Service\Flickr;
     use Flickrer\Service\User;
     use Flickrer\Utility\Object;
     use Slim\Http\Request;
@@ -73,15 +74,65 @@ namespace Flickrer {
          */
         public function routers()
         {
-            $app = $this->app;
             // index pure html
             $this->app->get('/', function (Request $request, Response $response) {
                 $response->getBody()->write('Please browse into /index.html, thank you');
                 return $response;
             });
 
-            // user related
+            $this->routeUser();
+            $this->routeFlickr();
+
+        }
+
+        /**
+         * route search actions
+         */
+        protected function routeFlickr()
+        {
+            $search = Flickr::singleton();
+            $app = $this->app;
+            $this->app->post('/search', function(Request $request, Response $response) use ($search, $app) {
+                // perform search & add new search entry
+                try {
+                    $data = $request->getParsedBody();
+                    $response->withJson([
+                        'success' => true,
+                        'data' => $search->search($data)
+                    ]);
+                } catch (\Exception $e) {
+                    $response->withJson([
+                        'success' => false,
+                        'error' => $e->getMessage()
+                    ]);
+                }
+
+            });
+            $this->app->get('/search/recent', function(Request $request, Response $response) use ($search, $app) {
+                // perform search & add new search entry
+                try {
+                    $response->withJson([
+                        'success' => true,
+                        'data' => $search->getSearches()
+                    ]);
+                } catch (\Exception $e) {
+                    $response->withJson([
+                        'success' => false,
+                        'error' => $e->getMessage()
+                    ]);
+                }
+
+            });
+
+        }
+
+        /**
+         * route user actions
+         */
+        protected function routeUser()
+        {
             $user = User::singleton();
+            $app = $this->app;
 
             $this->app->get('/user', function (Request $request, Response $response) use ($user, $app) {
                 $response->withJson($user->getInfo());
@@ -117,7 +168,7 @@ namespace Flickrer {
             $this->app->get('/user/logout', function (Request $request, Response $response) {
                 unset($_SESSION['isLoggedIn'], $_SESSION['user']);
                 $response->withJson([
-                    'message'=> 'user has logged out'
+                    'message' => 'user has logged out'
                 ]);
             });
         }

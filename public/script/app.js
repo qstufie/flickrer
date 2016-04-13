@@ -6,6 +6,35 @@
 (function () {
 
   var loadedJS = {};
+  /**
+   * the main search function
+   * @param tags
+   * @param text
+   * @param page
+   * @param callback
+   */
+  window.search = function (tags, text, page, callback) {
+    $.post('/search', {tags: tags, text: text}).done(function (resp) {
+      loading(false);
+      resp = JSON.parse(resp);
+
+      if (!callback) {
+        callback = function (resp) {
+          // just notify change
+          if (resp.success === true) {
+            // tell main app to load results
+            SimpleApp('flickrer').updateState('imagesFound', resp.data);
+          }
+          // also re-render the search form
+          SimpleApp('flickrer-search').data.tags.value = tags;
+          SimpleApp('flickrer-search').data.text.value = text;
+          SimpleApp('flickrer-search').render();
+        };
+      }
+
+      callback(resp);
+    });
+  };
 
   /**
    * load js dynamically,
@@ -49,9 +78,10 @@
   /**
    * state check and load js accordingly
    */
-  function checkUserState()
-  {
+  function checkUserState() {
+    loading(true);
     $.getJSON('/user').done(function (resp) {
+      loading(false);
       // check logged in or out
       if (resp.isLoggedIn === true) {
         // load search!
@@ -59,13 +89,14 @@
       } else {
         loadJs('script/user.js', 'app-main');
       }
-      // clean the middle
-      document.getElementById('app').innerHTML = '';
     });
   }
 
   // this app doesn't really do anything except for checking the state of user and decide whether to load form or load search
-  var app = SimpleApp('flickrer');
+  var app = SimpleApp('flickrer', {
+    localStorageWrite: false,
+    localStorageRead: false
+  });
 
   app.template.main = {
     default: '<div class="container">' +
@@ -79,11 +110,11 @@
   };
 
   app.data.content = {
-    _info: 'searching for current user, please wait...'
+    _info: 'Validating your login status, please wait'
   };
 
   // callback after render
-  app.on(SimpleAppDidRender, 'checkUserState', function () {
+  app.on(SimpleAppFinish, 'checkUserState', function () {
     checkUserState();
   });
 
@@ -93,9 +124,19 @@
     checkUserState();
   });
 
+  app.on(SimpleAppStateIsUpdated, 'imagesFound', function (obj) {
+    window.searchData = obj.state.imagesFound;
+    if (!window.isResultsAppLoaded) {
+      loadJs('script/results.js');
+    } else {
+      SimpleApp('flickrer-results').data = obj.state.imagesFound;
+      // always re-render
+      SimpleApp('flickrer-results').render(true);
+    }
+  });
+
   // render
   app.init(document.getElementById('main'), true);
-
 
 })
 ();

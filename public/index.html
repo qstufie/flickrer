@@ -6,12 +6,51 @@
   <title>Flickrer</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <style>
+    body {
+      position: relative;
+    }
+
+    #loader {
+      width: 1px;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 200px;
+      z-index: 2;
+    }
+
+    #loader:after {
+      display: block;
+      content: 'loading...';
+      font: bold 11px arial;
+      color: #fff;
+      background: url('/images/loader.gif') 0 0 no-repeat;
+      width: 64px;
+      margin-left: -32px;
+      height: 32px;
+      padding-top: 8px;
+    }
+    .gallery{
+      margin: 10px 0 0 10px;
+    }
+    .gallery .gallery-item{
+      margin: 0 10px 10px 0;
+    }
+  </style>
+  <script>
+    function loading(show) {
+      document.getElementById('loader').style.display = (show === true) ? 'block' : 'none';
+    }
+  </script>
 </head>
 <body>
+<div id="loader" style="display: none;"></div>
 <div id="main">
   <script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
-  <script src="bower_components/simple.js/dist/simple.min.js"></script>
+  <script src="bower_components/simple.js/dist/simple.dev.js"></script>
   <script async src="script/app.js"></script>
 </div>
+<div id="results"></div>
 </body>
 </html>

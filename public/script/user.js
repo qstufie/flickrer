@@ -6,17 +6,20 @@
 (function () {
 
   // this app doesn't really do anything except for checking the state of user and decide whether to load form or load search
-  var app = SimpleApp('flickrer-user');
+  var app = SimpleApp('flickrer-user', {
+    localStorageWrite: false,
+    localStorageRead: false
+  });
 
   // tempaltes
   app.template.main = {
     default: '<div class="panel panel-primary"><div class="panel-heading">{hdr}</div><div class="panel-body">' +
-    '<form autocomplete="off" role="form">{info}' +
+    '<div class="form">{info}' +
     '<div class="form-group" {attr}><label>Your name:</label>{name}</div>' +
     '<div class="form-group" {attr}><label>Username:</label>{username}</div>' +
     '<div class="form-group" {attr}><label>Password:</label>{password}</div>' +
     '{submit}' +
-    '</form>' +
+    '</div>' +
     '{msg}</div></div>'
   };
 

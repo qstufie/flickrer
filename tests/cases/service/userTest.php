@@ -41,4 +41,3 @@ class TestServiceUser extends PHPUnit_Framework_TestCase
     }
 
 }
-?>

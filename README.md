@@ -53,11 +53,11 @@ The email says I get 48 hours, in reality, I get home at 7pm and I need to spend
 
 
 
-~~~~~~~~~~~~~~~ original requirements ~~~~~~~~~~~~~~~~~~~~~~
+## ~~~~~~~~~~~~~~~ original requirements ~~~~~~~~~~~~~~~~~~~~~~
 
-# Flickr Image Gallery
+### Flickr Image Gallery
 
-## Question
+#### Question
 
 Using an appropriate framework as a foundation, create an app which 
 generates image galleries in response to user searches, drawing content 
@@ -73,7 +73,7 @@ from Flickr using their REST API.
 
 You are free to use whatever framework and storage technologies you deem appropriate, but you should justify your choices in the application's README.
 
-## Notes
+#### Notes
 
 You should
 

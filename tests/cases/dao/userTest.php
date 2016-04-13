@@ -53,7 +53,4 @@ class TestDaoUser extends PHPUnit_Framework_TestCase
         $this->assertEquals($u->getData(), $this->dao->getUserByUsernameAndPassword('jd', 'pass')->getData());
     }
 
-
 }
-
-?>

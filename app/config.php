@@ -15,7 +15,9 @@ $prod = [
         'dbname' => 'flickrer'
     ],
     'endpoint' => '<flickr_ep>',
-    'salt' => '<userpass_salt>'
+    'salt' => '<userpass_salt>',
+    'items_per_page' => 5,
+    'max_recent_searches' => 5
 ];
 
 // dev
@@ -23,7 +25,8 @@ $dev = $prod;
 
 $dev['displayErrorDetails'] = true;
 // just use the default flickr key for this one, hopefully they won't find out...
-$dev['endpoint'] = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a1deede842a6d0bd9d6c33f92bf7165d&format=json';
+
+$dev['endpoint'] = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=99ea7408ecb4fe4e18b37131fa5a9455&api_secret=528d383dd2cad018&format=json&nojsoncallback=1';
 $dev['db']['host']   = "127.0.0.1";
 $dev['db']['user']   = "dev";
 $dev['db']['pass']   = "pass123";
