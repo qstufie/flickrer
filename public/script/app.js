@@ -89,6 +89,8 @@
         loadJs('script/search.js', 'app-main');
       } else {
         loadJs('script/user.js', 'app-main');
+        // also clean the search results
+        document.getElementById('results').innerHTML = '';
       }
     });
   }

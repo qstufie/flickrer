@@ -1,4 +1,5 @@
 /* db setup */
+DROP DATABASE `flickrer_test`;
 CREATE DATABASE `flickrer_test` DEFAULT CHARACTER SET = `utf8`;
 USE `flickrer_test`;
 
@@ -8,8 +9,8 @@ CREATE TABLE `recent_searches` (
   `id` bigint(32) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(32) NOT NULL,
   `search_params` varchar(500) NOT NULL DEFAULT '',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `updated_at` timestamp DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `created_at` (`created_at`),
@@ -24,8 +25,8 @@ CREATE TABLE `users` (
   `username` varchar(200) NOT NULL DEFAULT '',
   `passhash` varchar(64) NOT NULL DEFAULT '',
   `name` varchar(250) DEFAULT '',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `updated_at` timestamp DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `passhash` (`passhash`),

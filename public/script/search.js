@@ -140,8 +140,7 @@
   // extra
   window.logout = function () {
     $.get('/user/logout').done(function (resp) {
-      // alert state change
-      SimpleApp('flickrer').updateState('userState', {state: resp});
+      location.reload(true);
     })
   }
 

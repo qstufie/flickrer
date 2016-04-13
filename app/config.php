@@ -24,13 +24,20 @@ $prod = [
 $dev = $prod;
 
 $dev['displayErrorDetails'] = true;
-// just use the default flickr key for this one, hopefully they won't find out...
 
+// hey this is my test key, don't abuse it thanks
 $dev['endpoint'] = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=99ea7408ecb4fe4e18b37131fa5a9455&api_secret=528d383dd2cad018&format=json&nojsoncallback=1';
 $dev['db']['host']   = "127.0.0.1";
 $dev['db']['user']   = "dev";
 $dev['db']['pass']   = "pass123";
 $dev['salt'] = 'dev-salt';
+
+// vagrant box
+$vagrant = $dev;
+$vagrant['db']['host']   = "localhost";
+$vagrant['db']['user']   = "root";
+$vagrant['db']['pass']   = "root";
+$vagrant['salt'] = 'vagrant-salt';
 
 // unit_test
 $unit_test = $dev;
@@ -39,6 +46,7 @@ $unit_test['salt'] = 'unit-test-salt';
 
 return [
     'dev' => $dev,
+    'vagrant' => $vagrant,    
     'unit_test' => $unit_test,
     'prod' => $prod
 ];
