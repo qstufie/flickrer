@@ -22,7 +22,7 @@ sudo apachectl restart
 ```
 
 Finally, add the following to your hosts file (on your own host machine, not vagrant machine!):
-`192.168.33.10	flicker.vagrant.localhost`
+```192.168.33.10	flicker.vagrant.localhost```
 
 Then browse into http://flicker.vagrant.localhost/index.html, and that's it!
 
