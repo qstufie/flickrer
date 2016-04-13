@@ -4,9 +4,9 @@
   "description": "flicker client with user rego",
   "main": "index.html",
   "scripts": {
-    "test:dao": "./vendor/phpunit/phpunit/phpunit tests/cases/dao/",
-    "test:service": "./vendor/phpunit/phpunit/phpunit tests/cases/service/",
-    "test:model": "./vendor/phpunit/phpunit/phpunit tests/cases/model/",
+    "test:dao": "php ./vendor/phpunit/phpunit/phpunit tests/cases/dao/",
+    "test:service": "php ./vendor/phpunit/phpunit/phpunit tests/cases/service/",
+    "test:model": "php ./vendor/phpunit/phpunit/phpunit tests/cases/model/",
     "test": "echo 'Run all tests' && npm run test:dao -s && npm run test:service -s"
   },
   "repository": {
