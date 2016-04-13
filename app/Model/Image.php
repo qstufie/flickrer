@@ -25,7 +25,7 @@ class Image extends Base
 
     public function getThumbSrc()
     {
-        return "https://farm{$this->data['farm']}.staticflickr.com/{$this->data['server']}/{$this->data['id']}_{$this->data['secret']}_m.jpg";
+        return "https://farm{$this->data['farm']}.staticflickr.com/{$this->data['server']}/{$this->data['id']}_{$this->data['secret']}_q.jpg";
     }
 
     public function getPhotoPage()

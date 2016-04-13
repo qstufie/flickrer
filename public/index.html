@@ -31,11 +31,34 @@
       height: 32px;
       padding-top: 8px;
     }
-    .gallery{
-      margin: 10px 0 0 10px;
-    }
     .gallery .gallery-item{
-      margin: 0 10px 10px 0;
+      width:150px;
+      margin: 0 20px 20px 0;
+      display: inline-block;
+      position: relative;
+      transition: all .2s ease-in-out;
+    }
+    .gallery .gallery-item:hover{
+      transform: scale(1.1);
+    }
+    .gallery .gallery-item label{
+      white-space: nowrap;
+      width: 12em;
+      color: #fff;
+      background: #000;
+      opacity: .7;
+      border-radius: 2px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      max-width: 300px;
+      text-indent: 10px;
+      padding: 4px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   </style>
   <script>

@@ -17,7 +17,14 @@
   };
   app.template.sub.images = {
     _wrapper: ['<div {attr} class="gallery">', '</div>'],
-    default: '<a {attr} class="gallery-item" href="{_url}"><img src="{_thumb_src}" class="img-rounded" alt="{_caption}"><label>{_caption}</label></a>'
+    default: '<a {attr} class="gallery-item" target="_blank" href="{_url}">' +
+    '<img src="{_thumb_src}" class="img-thumbnail img-responsive" alt="{_caption}">' +
+    '<label>{_caption}</label>' +
+    '</a>'
+  };
+  app.template.sub.paging = {
+    _wrapper: ['<ul {attr} class="pagination">', '</ul>'],
+    default: '<li><a href="#" onclick="window.search(\'{_tags}\', \'{_text}\', {_page})">{_page}</a></li>'
   };
 
   // data (late binding)

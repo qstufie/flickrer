@@ -14,7 +14,8 @@
    * @param callback
    */
   window.search = function (tags, text, page, callback) {
-    $.post('/search', {tags: tags, text: text}).done(function (resp) {
+    loading(true);
+    $.post('/search', {tags: tags, text: text, page: page}).done(function (resp) {
       loading(false);
       resp = JSON.parse(resp);
 

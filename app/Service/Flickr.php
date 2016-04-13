@@ -142,11 +142,38 @@ class Flickr
             $meta['_' . $k] = $v;
         }
 
+        // now work out paging
+        $paging = [];
+        $page = $meta['_page'];
+        $pages = $meta['_pages'];
+
+        // google style paging! yay!
+        $start = $page - 5;
+        $end = $page + 5;
+
+        if ($start <= 0) {
+            $end = $end - $start + 1;
+            $start = 1;
+        }
+        if ($end > $pages) {
+            $end = $pages;
+        }
+        for ($i = $start; $i <= $end; $i++) {
+            $tmp = [];
+            // make it template friendly
+            foreach ($params as $k => $v) {
+                $tmp['_' . $k] = $v;
+            }
+            $tmp['_page'] = $i;
+            $paging[] = $tmp;
+        }
+
         return [
             'meta' => $meta,
             'images' => ['element' => $images],
             // also all recent searches
-            'recent_searches' => $this->getSearches($uid)
+            'recent_searches' => $this->getSearches($uid),
+            'paging' => ['element' => $paging]
         ];
     }
 

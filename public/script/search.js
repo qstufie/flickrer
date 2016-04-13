@@ -128,6 +128,7 @@
       } else {
         // tell main app to load results
         SimpleApp('flickrer').updateState('imagesFound', resp.data);
+        app.data.recent_searches = resp.data.recent_searches;
       }
       app.render();
     });
