@@ -35,6 +35,8 @@ mysql -u root -proot < testdb.sql
 sudo apachectl restart
 ```
 
+Once this is all done, quickly run `npm run test` to verify your build, if there's any error you would know something is wrong.
+
 Finally, add the following to your hosts file (on your own host machine, not vagrant machine!):
 ```192.168.33.10	flicker.vagrant.localhost```
 
