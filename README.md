@@ -1,6 +1,19 @@
 # flickrer
 flicker client with user rego
 
+## structure
+the whole app is done in a super simple structure:
+- static html with js as the front (and css/js from public cdns so I don't need to write them)
+- php backend serve as microservice - frankly, I'd use node + mongodb for this job, but you guys wanted PHP so here goes.
+- As point #2 explains, php runs (with slim framework backing it) as a micro service and it only pumps out JSON data, this app is highly portable, in harsh environments, you can load balance tens of these little instances and just sit the static home somewhere in amazon. 
+
+### framework used:
+- backend: php slim framework
+- frontend: simple.js (my little baby, hasn't got time to promote it yet)
+
+### fun facts!
+Expecting to see a lot of templates? Sorry to disappoint. I'm using my little sweet simpleJS to make this a one page app, which provides much easier logic pattern and much better code readability, for more details do checkout http://coreorm.github.io/simple.js/. So yeah, there's only a static html page, no template whatsoever.
+
 ## Setup - Vagrant Setup (recommended - super easy)
 I won't waste time talking about getting vagrant and virtualbox, I suppose that's all done, now.
 
@@ -49,19 +62,6 @@ Also make sure you add an entry to hosts so you can see it on your local:
 `127.0.0.1 flicker.local`
 
 Then you can just browse to flicker.local
- 
-### fun facts!
-Expecting to see a lot of templates? Sorry to disappoint. I'm using my little sweet simpleJS to make this a one page app, which provides much easier logic pattern and much better code readability, for more details do checkout http://coreorm.github.io/simple.js/. So yeah, there's only a static html page, no template whatsoever.
-
-#### structure
-the whole app is done in a super simple structure:
-- static html with js as the front (and css/js from public cdns so I don't need to write them)
-- php backend serve as microservice - frankly, I'd use node + mongodb for this job, but you guys wanted PHP so here goes.
-- As point #2 explains, php runs (with slim framework backing it) as a micro service and it only pumps out JSON data, this app is highly portable, in harsh environments, you can load balance tens of these little instances and just sit the static home somewhere in amazon. 
-
-#### framework used:
-- backend: php slim framework
-- frontend: simple.js (my little baby, hasn't got time to promote it yet)
 
 ## Test
 Grab the `testdb.sql` file from \cfn folder and import it into your mysql db. 
