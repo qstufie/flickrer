@@ -1,9 +1,7 @@
 # flickrer
 flicker client with user rego
 
-## setup
-
-### Vagrant Setup (recommended - super easy)
+## Setup - Vagrant Setup (recommended - super easy)
 I won't waste time talking about getting vagrant and virtualbox, I suppose that's all done, now.
 
 In project root
@@ -26,6 +24,10 @@ Finally, add the following to your hosts file (on your own host machine, not vag
 
 Then browse into http://flicker.vagrant.localhost/index.html, and that's it!
 
+*if you don't want to setup this in a tranditional way, you can just stop reading here*
+
+
+## Setup - manual
 
 ### build
 first of all, get your usual tools ready - composer, npm, etc. 
@@ -61,7 +63,7 @@ the whole app is done in a super simple structure:
 - backend: php slim framework
 - frontend: simple.js (my little baby, hasn't got time to promote it yet)
 
-## test
+## Test
 Grab the `testdb.sql` file from \cfn folder and import it into your mysql db. 
 
 Then simply run the following commands to test
