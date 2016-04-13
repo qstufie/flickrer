@@ -34,7 +34,7 @@ $dev['salt'] = 'dev-salt';
 
 // vagrant box
 $vagrant = $dev;
-$vagrant['db']['host']   = "127.0.0.1";
+$vagrant['db']['host']   = "localhost";
 $dev['db']['user']   = "root";
 $dev['db']['pass']   = "root";
 $vagrant['salt'] = 'vagrant-salt';
