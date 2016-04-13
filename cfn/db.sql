@@ -1,5 +1,5 @@
 /* db setup */
-DROP DATABASE `flickrer`;
+DROP DATABASE IF EXISTS `flickrer`;
 CREATE DATABASE `flickrer` DEFAULT CHARACTER SET = `utf8`;
 USE `flickrer`;
 

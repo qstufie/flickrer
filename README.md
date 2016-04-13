@@ -6,6 +6,9 @@ the whole app is done in a super simple structure:
 - static html with js as the front (and css/js from public cdns so I don't need to write them)
 - php backend serve as microservice - frankly, I'd use node + mongodb for this job, but you guys wanted PHP so here goes.
 - As point #2 explains, php runs (with slim framework backing it) as a micro service and it only pumps out JSON data, this app is highly portable, in harsh environments, you can load balance tens of these little instances and just sit the static home somewhere in amazon. 
+- db: mysql
+
+Reason for mysql: I'd pick mongodb + nodeJS for this any time, as it being atomic and self contained - there's no cross-user joins or anything, everything is around the one user that's logged in, however, this is a php question, and mysql is just handy enough so it will do the job - strictly speaking, there is indeed a little join we can do with recent_searches, however the requirements don't really ask for a 'grab a few users and all their recent searches' so it's not really being used.
 
 ### framework used:
 - backend: php slim framework
@@ -51,8 +54,6 @@ first of all, get your usual tools ready - composer, npm, etc.
 ### install db
 Grab the `db.sql` file from \cfn folder and import it into your mysql db.
 
-Reason for mysql: I'd pick mongodb + nodeJS for this any time, as it being atomic and self contained - there's no cross-user joins or anything, everything is around the one user that's logged in, however, this is a php question, and mysql is just handy enough so it will do the job - strictly speaking, there is indeed a little join we can do with recent_searches, however the requirements don't really ask for a 'grab a few users and all their recent searches' so it's not really being used.
-
 ### apache conf
 Grab the `Flickrer.cnf` file from \cfn folder and update the path to your own path, then include under apache conf dir `sites_enabled`, make sure you run `service httpd restart` or `apachectl restart` depending on which system you are on.
 
@@ -86,6 +87,7 @@ The email says I get 48 hours, in reality, I get home at 7pm and I need to spend
 - nice npm commands in package.json for easier CLI fun
 - (old) Google style pagination
 - fully responsive single page web app
+- did I mention vagrant? This whole thing is self-contained and you don't need a local env.
 
 
 ## ~~~~~~~~~~~~~~~ original requirements ~~~~~~~~~~~~~~~~~~~~~~
